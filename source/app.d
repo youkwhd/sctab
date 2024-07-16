@@ -1,10 +1,19 @@
 import std.stdio;
-import args = sctab.args;
+import core.stdc.stdlib : exit;
+import args = sctab.args : Args;
+
+void fetch()
+{
+}
 
 void main(string[] argv)
 {
-    args.parse(argv);
+    Args args = args.parse(argv);
 
-    writeln(argv);
+    if (args.fetch) {
+        fetch();
+        exit(0);
+    }
+
     writeln("Hello from D!");
 }
