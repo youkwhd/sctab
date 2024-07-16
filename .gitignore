@@ -1,4 +1,5 @@
 sctab
+!source/sctab/
 
 *.exe
 *.pdb
