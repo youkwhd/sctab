@@ -1,6 +1,6 @@
 name "sctab"
 targetType "executable"
 description "Linux syscall table"
-authors "youkwhd"
-copyright "Copyright © 2024, youkwhd"
+authors "youkwhd <lolywk@tutanota.com>"
+copyright "Copyright © 2024, youkwhd <lolywk@tutanota.com>"
 license "GPL-2.0-only"
