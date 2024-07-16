@@ -1,0 +1,7 @@
+sctab
+
+*.exe
+*.pdb
+*.o
+*.obj
+*.lst
