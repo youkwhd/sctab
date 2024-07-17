@@ -11,7 +11,7 @@ immutable cacheDir = "cache/";
 void fetch()
 {
     auto urls = [
-        /// <url>, <filename overwrite>
+        /// <url>, [<filename overwrite>]
         ["https://raw.githubusercontent.com/torvalds/linux/master/arch/x86/entry/syscalls/syscall_64.tbl",    null],
         ["https://raw.githubusercontent.com/torvalds/linux/master/arch/x86/entry/syscalls/syscall_32.tbl",    null],
         ["https://raw.githubusercontent.com/torvalds/linux/master/include/linux/syscalls.h",                  null],
