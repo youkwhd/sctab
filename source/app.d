@@ -24,9 +24,9 @@ void fetch()
     }
 
     /// TODO: add threading, log downloaded file.
-    for (size_t i = 0; i < urls.length; i++) {
-        string filename = urls[i][1] ? urls[i][1] : baseName(urls[i][0]);
-        download(urls[i][0], cacheDir ~ filename);
+    foreach (ref url; urls) {
+        string filename = url[1] ? url[1] : baseName(url[0]);
+        download(url[0], cacheDir ~ filename);
     }
 }
 
