@@ -1,11 +1,12 @@
 module sctab.gen;
 
-enum Generation { html, csv };
+/// Supported file types
+enum File { html, csv };
 
-void generate(Generation type)
+void generate(File type)
 {
     final switch (type) {
-        case Generation.html: return;
-        case Generation.csv: return;
+        case File.html: return;
+        case File.csv: return;
     }
 }

@@ -4,6 +4,7 @@ import std.path;
 import std.format;
 import std.net.curl;
 import core.stdc.stdlib : exit;
+import tbl = sctab.tbl;
 import args = sctab.args : Args;
 
 immutable cacheDir = "cache/";
@@ -40,5 +41,5 @@ void main(string[] argv)
         exit(0);
     }
 
-    writeln("Hello from D!");
+    string[][] syscall64 = tbl.parse(cacheDir ~ "syscall_64.tbl");
 }
