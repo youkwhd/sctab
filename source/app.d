@@ -24,7 +24,7 @@ void fetch()
     }
 
     /// TODO: add threading, log downloaded file.
-    foreach (ref url; urls) {
+    foreach (url; urls) {
         string filename = url[1] ? url[1] : baseName(url[0]);
         download(url[0], cacheDir ~ filename);
     }
