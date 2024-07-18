@@ -2,6 +2,7 @@
 module sctab.decl;
 
 /// get function parameters
-string[] params(string fn) {
+string[] params(string fn)
+{
     return [];
 }
