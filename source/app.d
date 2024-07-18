@@ -23,9 +23,7 @@ void fetch()
         fs.mkdir(cacheDir);
     }
 
-    /**
-    TODO: add threading, log downloaded file.
-    */
+    /// TODO: add threading, log downloaded file.
     for (size_t i = 0; i < urls.length; i++) {
         string filename = urls[i][1] ? urls[i][1] : baseName(urls[i][0]);
         download(urls[i][0], cacheDir ~ filename);
