@@ -27,6 +27,10 @@ void generate(File type)
                     func = decl.func(row[3]);
 
                 string[] params = decl.params(func);
+                for (int i = 0; i < 6; i++) {
+                    string param = i < params.length ? params[i] : "";
+                    writeln("        <th>" ~ param ~ "</th>");
+                }
 
                 writeln("    </tr>");
             }
