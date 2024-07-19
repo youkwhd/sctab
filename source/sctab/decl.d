@@ -48,6 +48,11 @@ string[] params(string fn)
     assert(fn.endsWith(");"));
     fn = fn[fn.indexOf("(")+1..fn.lastIndexOf(");")];
 
+    /// case when "int f(void);"
+    if (fn == "void") {
+        return [];
+    }
+
     /// TODO: this is bogos, invalid.
     /// Considering we have type function pointer, which could have ",".
     return fn.split(",").map!(a => a.strip()).array();
