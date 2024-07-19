@@ -3,6 +3,7 @@ module sctab.gen;
 import std.stdio;
 import std.regex;
 import std.range;
+import std.conv;
 import std.file;
 import decl = sctab.decl;
 import tbl = sctab.tbl;
@@ -17,10 +18,19 @@ void generate(File type)
     final switch (type) {
         case File.html:
             writeln("<table>");
+
+            writeln("    <tr>");
+            writeln("        <th>Number</th>");
+            writeln("        <th>Name</th>");
+            for (int i = 0; i < 6; i++) {
+                writeln("        <th>arg" ~ to!(string)(i) ~ "</th>");
+            }
+            writeln("    </tr>");
+
             foreach (row; syscall64) {
                 writeln("    <tr>");
-                writeln("        <th>" ~ row[0] ~ "</th>");
-                writeln("        <th>" ~ row[2] ~ "</th>");
+                writeln("        <td>" ~ row[0] ~ "</td>");
+                writeln("        <td>" ~ row[2] ~ "</td>");
 
                 string func = decl.func("sys_" ~ row[2]);
                 if (func.empty && row.length > 3)
@@ -29,7 +39,7 @@ void generate(File type)
                 string[] params = decl.params(func);
                 for (int i = 0; i < 6; i++) {
                     string param = i < params.length ? params[i] : "";
-                    writeln("        <th>" ~ param ~ "</th>");
+                    writeln("        <td>" ~ param ~ "</td>");
                 }
 
                 writeln("    </tr>");
