@@ -2,3 +2,10 @@ sctab
 =====
 
 Linux system call table.
+
+Building
+--------
+
+Assuming `dub` is installed:
+
+    ./build.sh
