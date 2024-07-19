@@ -1,4 +1,6 @@
 #!/bin/bash
+#
+# usage: ./web/generate.sh > web/syscalls/x64.html
 
 tab() {
     local n=$1
@@ -12,7 +14,7 @@ tab() {
 
 cat <<EOF
 <!DOCTYPE html>
-<html>
+<html lang="en">
     <head>
         <title>sctab - syscall table</title>
     </head>
