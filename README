@@ -9,3 +9,14 @@ Building
 Assuming `dub` is installed:
 
     ./build.sh
+
+Generating
+----------
+
+Run `-f` flag first to pull neccessary files:
+    
+    ./sctab -f
+
+Then, execute:
+
+    ./sctab
