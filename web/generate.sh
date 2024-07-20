@@ -1,6 +1,6 @@
 #!/bin/bash
 #
-# usage: ./web/generate.sh > web/syscalls/x64.html
+# usage: ./web/generate.sh <arch> > web/syscalls/<arch>.html
 
 tab() {
     local n=$1
@@ -12,6 +12,12 @@ tab() {
     done
 }
 
+if [ "$1" = "" ]; then
+    echo "usage: ./web/generate.sh <arch>"
+    echo "all possible values of arch can be seen from: \`sctab -h\`"
+    exit 1
+fi
+
 cat <<EOF
 <!DOCTYPE html>
 <html lang="en">
@@ -19,11 +25,11 @@ cat <<EOF
         <title>sctab - syscall table</title>
     </head>
     <body>
-        <h1>Linux x64 System Call Reference Table</h1>
+        <h1>Linux $1 System Call Reference Table</h1>
         <p>Auto generated syscalls table</p>
 EOF
 
-./sctab | while IFS='' read -r line; do
+./sctab --arch "$1" | while IFS='' read -r line; do
     tab 2
     echo "$line"
 done
