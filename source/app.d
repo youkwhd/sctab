@@ -4,7 +4,7 @@ import std.path;
 import std.format;
 import std.net.curl;
 import core.stdc.stdlib : exit;
-import gen = sctab.gen;
+import sctab.gen;
 import args = sctab.args : Args;
 
 /// TODO: resolve prob
@@ -46,5 +46,5 @@ void main(string[] argv)
         exit(0);
     }
 
-    gen.generate(args.arch, args.format);
+    generate(args.arch, args.format);
 }
