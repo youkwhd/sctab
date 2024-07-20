@@ -48,7 +48,6 @@ string[] params(string fn)
     assert(fn.endsWith(");"));
     fn = fn[fn.indexOf("(")+1..fn.lastIndexOf(");")];
 
-    /// case when "int f(void);"
     if (fn == "void") {
         return [];
     }
