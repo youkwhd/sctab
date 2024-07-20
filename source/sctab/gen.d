@@ -44,10 +44,36 @@ void generate(File type)
 
                 writeln("    </tr>");
             }
-            writeln("</table>");
 
+            writeln("</table>");
             break;
 
-        case File.csv: return;
+        case File.csv:
+            write("Number,Name");
+
+            for (int i = 0; i < 6; i++) {
+                write(",arg" ~ to!(string)(i));
+            }
+
+            write("\n");
+
+            foreach (row; syscall64) {
+                write(row[0] ~ ",");
+                write(row[2]);
+
+                string func = decl.func("sys_" ~ row[2]);
+                if (func.empty && row.length > 3)
+                    func = decl.func(row[3]);
+
+                string[] params = decl.params(func);
+                for (int i = 0; i < 6; i++) {
+                    string param = i < params.length ? params[i] : "";
+                    write("," ~ param);
+                }
+
+                write("\n");
+            }
+
+            break;
     }
 }
