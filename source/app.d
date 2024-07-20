@@ -19,12 +19,14 @@ void fetch()
         ["https://raw.githubusercontent.com/torvalds/linux/master/include/asm-generic/syscalls.h",            "syscalls-asm-generic.h"],
     ];
 
-    if (!fs.exists(cacheDir)) {
+    if (!fs.exists(cacheDir))
+    {
         fs.mkdir(cacheDir);
     }
 
     /// TODO: add threading, log downloaded file.
-    foreach (url; urls) {
+    foreach (url; urls)
+    {
         string filename = url[1] ? url[1] : baseName(url[0]);
         download(url[0], cacheDir ~ filename);
     }
@@ -34,7 +36,8 @@ void main(string[] argv)
 {
     Args args = args.parse(argv);
 
-    if (args.fetch) {
+    if (args.fetch)
+    {
         fetch();
         exit(0);
     }

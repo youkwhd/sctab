@@ -21,7 +21,8 @@ void help(string prog)
 
 Args parse(string[] argv)
 {
-    if (argv.canFind("-h") || argv.canFind("--help")) {
+    if (argv.canFind("-h") || argv.canFind("--help"))
+    {
         help(argv[0]);
         exit(0);
     }

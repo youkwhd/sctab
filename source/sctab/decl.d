@@ -24,7 +24,8 @@ string func(string name)
     /// @once
     __loadHeader();
 
-    for (size_t i = 0; i < header.length; i++) {
+    for (size_t i = 0; i < header.length; i++)
+    {
         if (!header[i].startsWith("asmlinkage") || header[i].indexOf(" " ~ name ~ "(") == -1)
             continue;
 
@@ -41,14 +42,16 @@ string func(string name)
 /// get function parameters
 string[] params(string fn)
 {
-    if (fn.empty) {
+    if (fn.empty)
+    {
         return [];
     }
 
     assert(fn.endsWith(");"));
     fn = fn[fn.indexOf("(")+1..fn.lastIndexOf(");")];
 
-    if (fn == "void") {
+    if (fn == "void")
+    {
         return [];
     }
 
