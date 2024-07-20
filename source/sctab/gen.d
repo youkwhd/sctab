@@ -11,7 +11,6 @@ import tbl = sctab.tbl;
 /// Supported file types
 enum File { html, csv };
 
-/// Supported architectures
 enum Arch { x86, x64 };
 
 private string[][] rawTable(Arch arch)
