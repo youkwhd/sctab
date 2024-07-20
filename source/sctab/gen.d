@@ -8,10 +8,15 @@ import std.file;
 import decl = sctab.decl;
 import tbl = sctab.tbl;
 
-/// Supported file types
-enum File { html, csv };
+enum Format {
+    html,
+    csv,
+};
 
-enum Arch { x86, x64 };
+enum Arch {
+    x86,
+    x64,
+};
 
 private string[][] rawTable(Arch arch)
 {
@@ -91,11 +96,11 @@ private void generateHtml(Arch arch)
     writeln("</table>");
 }
 
-void generate(Arch arch, File type)
+void generate(Arch arch, Format type)
 {
     final switch (type)
     {
-        case File.html: return generateHtml(arch);
-        case File.csv: return generateCsv(arch);
+        case Format.html: return generateHtml(arch);
+        case Format.csv: return generateCsv(arch);
     }
 }

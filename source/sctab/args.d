@@ -3,12 +3,12 @@ module sctab.args;
 import core.stdc.stdlib : exit;
 import std.algorithm.searching;
 import std.stdio;
-import sctab.gen : Arch, File;
+import sctab.gen : Arch, Format;
 
 struct Args
 {
     bool fetch = false;
-    File format = File.html;
+    Format format = Format.html;
     Arch arch = Arch.x64;
 }
 
@@ -76,11 +76,11 @@ Args parse(string[] argv)
                 switch (argv[++i])
                 {
                     case "html":
-                        args.format = File.html;
+                        args.format = Format.html;
                         break;
 
                     case "csv":
-                        args.format = File.csv;
+                        args.format = Format.csv;
                         break;
 
                     default:
