@@ -2,6 +2,7 @@ module sctab.args;
 
 import core.stdc.stdlib : exit;
 import std.algorithm.searching;
+import std.uni;
 import std.stdio;
 import sctab.gen : Arch, Format;
 
@@ -48,7 +49,7 @@ Args parse(string[] argv)
                     exit(1);
                 }
 
-                switch (argv[++i])
+                switch (argv[++i].toLower())
                 {
                     case "x86":
                         args.arch = Arch.x86;
@@ -73,7 +74,7 @@ Args parse(string[] argv)
                     exit(1);
                 }
 
-                switch (argv[++i])
+                switch (argv[++i].toLower())
                 {
                     case "html":
                         args.format = Format.html;
