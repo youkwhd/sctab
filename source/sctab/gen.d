@@ -14,7 +14,7 @@ enum File { html, csv };
 /// Supported architectures
 enum Arch { x86, x64 };
 
-string[][] rawTable(Arch arch)
+private string[][] rawTable(Arch arch)
 {
     final switch (arch)
     {

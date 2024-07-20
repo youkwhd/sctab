@@ -10,7 +10,7 @@ import std.conv;
 string[] header;
 bool loaded = false;
 
-void __loadHeader()
+private void loadHeader()
 {
     if (loaded) return;
     loaded = true;
@@ -22,7 +22,7 @@ void __loadHeader()
 string func(string name)
 {
     /// @once
-    __loadHeader();
+    loadHeader();
 
     for (size_t i = 0; i < header.length; i++)
     {
