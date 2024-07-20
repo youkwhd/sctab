@@ -12,7 +12,7 @@ tab() {
     done
 }
 
-if [ "$1" = "" ]; then
+if [[ "$1" = "" ]]; then
     echo "usage: ./web/generate.sh <arch>"
     echo "all possible values of arch can be seen from: \`sctab -h\`"
     exit 1
