@@ -96,6 +96,7 @@ private void generateHtml(Arch arch)
     writeln("</table>");
 }
 
+/// TODO: replace arg0..5 with registers.
 void generate(Arch arch, Format type)
 {
     final switch (type)
