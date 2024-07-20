@@ -46,5 +46,5 @@ void main(string[] argv)
         exit(0);
     }
 
-    gen.generate(gen.Arch.x86, gen.File.html);
+    gen.generate(args.arch, args.format);
 }
