@@ -13,10 +13,7 @@ Assuming `dub` is installed:
 Generating
 ----------
 
-Run `-f` flag first to pull neccessary files:
-    
-    ./sctab -f
-
-Then, execute:
+Run `./sctab -f` first to pull neccessary files,
+then execute:
 
     ./sctab
