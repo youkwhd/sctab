@@ -11,9 +11,21 @@ import tbl = sctab.tbl;
 /// Supported file types
 enum File { html, csv };
 
-void generate(File type)
+/// Supported architectures
+enum Arch { x86, x64 };
+
+string[][] rawTable(Arch arch)
 {
-    string[][] syscall64 = tbl.parse("cache/syscall_64.tbl");
+    final switch (arch)
+    {
+        case Arch.x86: return tbl.parse("cache/syscall_32.tbl");
+        case Arch.x64: return tbl.parse("cache/syscall_64.tbl");
+    }
+}
+
+void generate(Arch arch, File type)
+{
+    string[][] table = rawTable(arch);
 
     final switch (type)
     {
@@ -29,7 +41,7 @@ void generate(File type)
 
             writeln("    </tr>");
 
-            foreach (row; syscall64)
+            foreach (row; table)
             {
                 writeln("    <tr>");
                 writeln("        <td>" ~ row[0] ~ "</td>");
@@ -60,7 +72,7 @@ void generate(File type)
 
             write("\n");
 
-            foreach (row; syscall64)
+            foreach (row; table)
             {
                 write(row[0] ~ ",");
                 write(row[2]);
