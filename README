@@ -13,7 +13,7 @@ Assuming `dub` is installed:
 Generating
 ----------
 
-Run `./sctab -f` first to pull neccessary files,
+Run `./sctab --fetch` first to pull neccessary files,
 then execute:
 
     ./sctab
