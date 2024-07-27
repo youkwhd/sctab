@@ -39,7 +39,7 @@ private string[][] rawTable(Arch arch)
 private void generateCsv(Arch arch)
 {
     string[][] table = rawTable(arch);
-    string[] regs = registers(arch);
+    string[] regs = arch.registers();
 
     write(regs[0]);
     write(",Name");
@@ -73,7 +73,7 @@ private void generateCsv(Arch arch)
 private void generateHtml(Arch arch)
 {
     string[][] table = rawTable(arch);
-    string[] regs = registers(arch);
+    string[] regs = arch.registers();
 
     writeln("<table>");
     writeln("    <tr>");
