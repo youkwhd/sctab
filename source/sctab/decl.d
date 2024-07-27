@@ -1,4 +1,7 @@
 /// C decleration function parser
+/// 
+/// TODO: parse decleration functions from man pages
+/// it is generally better, ex: nfsservctl can be found from man 2.
 module sctab.decl;
 
 import std.algorithm.iteration;
