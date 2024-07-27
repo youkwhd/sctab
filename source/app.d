@@ -10,7 +10,7 @@ import args = sctab.args : Args;
 /// TODO: resolve prob
 ///
 /// making this relative to root path means
-/// it needs to be ran through / from the root path only.
+/// it needs to be ran through / from the project's root path only.
 immutable cacheDir = "cache/";
 
 void fetch()
