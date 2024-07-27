@@ -18,6 +18,15 @@ enum Arch {
     x64,
 };
 
+string[] registers(Arch arch)
+{
+    final switch (arch)
+    {
+        case Arch.x86: return ["%eax", "%ebx", "%ecx", "%edx", "%esi", "%edi", "%ebp"];
+        case Arch.x64: return ["%rax", "%rdi", "%rsi", "%rdx", "%r10", "%r8", "%r9"];
+    }
+}
+
 private string[][] rawTable(Arch arch)
 {
     final switch (arch)
@@ -30,11 +39,13 @@ private string[][] rawTable(Arch arch)
 private void generateCsv(Arch arch)
 {
     string[][] table = rawTable(arch);
+    string[] regs = registers(arch);
 
-    write("Number,Name");
+    write(regs[0]);
+    write(",Name");
 
-    for (int i = 0; i < 6; i++)
-        write(",arg" ~ to!(string)(i));
+    for (int i = 1; i <= 6; i++)
+        write("," ~ regs[i]);
 
     write("\n");
 
@@ -62,14 +73,15 @@ private void generateCsv(Arch arch)
 private void generateHtml(Arch arch)
 {
     string[][] table = rawTable(arch);
+    string[] regs = registers(arch);
 
     writeln("<table>");
     writeln("    <tr>");
-    writeln("        <th>Number</th>");
+    writeln("        <th>" ~ regs[0] ~ "</th>");
     writeln("        <th>Name</th>");
 
-    for (int i = 0; i < 6; i++)
-        writeln("        <th>arg" ~ to!(string)(i) ~ "</th>");
+    for (int i = 1; i <= 6; i++)
+        writeln("        <th>" ~ regs[i] ~ "</th>");
 
     writeln("    </tr>");
 
@@ -96,7 +108,6 @@ private void generateHtml(Arch arch)
     writeln("</table>");
 }
 
-/// TODO: replace arg0..5 with registers.
 void generate(Arch arch, Format type)
 {
     final switch (type)
