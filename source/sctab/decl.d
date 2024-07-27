@@ -40,11 +40,16 @@ string func(string name)
 }
 
 /// get function parameters
+///
+/// TODO: return value should not be fixed length 6
+/// make it more generic to be useable out of this project's scope.
 string[] params(string fn)
 {
+    immutable syscallMaxArgs = 6;
+
     if (fn.empty)
     {
-        return [];
+        return repeat("?", syscallMaxArgs).array();
     }
 
     assert(fn.endsWith(");"));
@@ -52,10 +57,10 @@ string[] params(string fn)
 
     if (fn == "void")
     {
-        return [];
+        return repeat("-", syscallMaxArgs).array();
     }
 
     /// TODO: this is bogos, invalid.
     /// Considering we have type function pointer, which could have ",".
-    return fn.split(",").map!(a => a.strip()).array();
+    return fn.split(",").map!(a => a.strip()).padRight("-", syscallMaxArgs).array();
 }
