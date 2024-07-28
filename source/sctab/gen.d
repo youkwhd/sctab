@@ -3,6 +3,8 @@ module sctab.gen;
 import std.stdio;
 import std.regex;
 import std.range;
+import std.array : appender;
+import std.format;
 import std.conv;
 import std.file;
 import decl = sctab.decl;
@@ -41,18 +43,20 @@ private void generateCsv(Arch arch)
     string[][] table = rawTable(arch);
     string[] regs = arch.registers();
 
-    write(regs[0]);
-    write(",Name");
+    write("Name");
 
-    for (int i = 1; i <= 6; i++)
+    for (int i = 0; i <= 6; i++)
         write("," ~ regs[i]);
 
     write("\n");
 
     foreach (ref row; table)
     {
-        write(row[0] ~ ",");
-        write(row[2]);
+        auto hex = appender!string();
+        formattedWrite(hex, "0x%02x", to!int(row[0]));
+
+        write(row[2] ~ ",");
+        write(hex[]);
 
         string func = decl.func("sys_" ~ row[2]);
         if (func.empty && row.length > 3)
@@ -77,19 +81,21 @@ private void generateHtml(Arch arch)
 
     writeln("<table>");
     writeln("    <tr>");
-    writeln("        <th>" ~ regs[0] ~ "</th>");
     writeln("        <th>Name</th>");
 
-    for (int i = 1; i <= 6; i++)
+    for (int i = 0; i <= 6; i++)
         writeln("        <th>" ~ regs[i] ~ "</th>");
 
     writeln("    </tr>");
 
     foreach (ref row; table)
     {
+        auto hex = appender!string();
+        formattedWrite(hex, "0x%02x", to!int(row[0]));
+
         writeln("    <tr>");
-        writeln("        <td>" ~ row[0] ~ "</td>");
         writeln("        <td>" ~ row[2] ~ "</td>");
+        writeln("        <td>" ~ hex[] ~ "</td>");
 
         string func = decl.func("sys_" ~ row[2]);
         if (func.empty && row.length > 3)
