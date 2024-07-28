@@ -38,7 +38,7 @@ cat <<EOF
     <body>
         <nav>
             <p>
-                <a href="/">sctab</a> - Linux system call table.
+                <a href="/">sctab</a> - linux system call table.
             </p>
             <ul>
                 <li><a href="/syscalls/x86.html">x86</a></li>
