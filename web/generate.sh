@@ -32,11 +32,19 @@ cat <<EOF
 <html lang="en">
     <head>
         <title>sctab - syscall table</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="/style.css">
     </head>
     <body>
-        <h1>Linux $1 System Call Reference Table</h1>
-        <p>Auto generated syscalls table</p>
+        <nav>
+            <p>
+                <a href="/">sctab</a> - Linux system call table.
+            </p>
+            <ul>
+                <li><a href="/syscalls/x86">x86</a></li>
+                <li><a href="/syscalls/x64">x64</a></li>
+            </ul>
+        </nav>
 EOF
 
 ./sctab --arch "$1" | while IFS='' read -r line; do
