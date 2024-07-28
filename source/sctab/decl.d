@@ -1,7 +1,9 @@
-/// C decleration function parser
-/// 
-/// TODO: parse decleration functions from man pages
-/// it is generally better, ex: nfsservctl can be found from man 2.
+// C decleration function parser
+// 
+// TODO: parse decleration functions from man pages
+// it is generally better, ex: nfsservctl can be found from man 2.
+//
+// `man --location`
 module sctab.decl;
 
 import std.algorithm.iteration;
@@ -21,10 +23,10 @@ private void loadHeader()
     header ~= File("cache/syscalls-asm-generic.h").byLine().map!(line => to!(string)(line)).array();
 }
 
-/// get asm linked function decleration
+// get asm linked function decleration
 string func(string name)
 {
-    /// @once
+    // @once
     loadHeader();
 
     for (size_t i = 0; i < header.length; i++)
@@ -42,10 +44,10 @@ string func(string name)
     return "";
 }
 
-/// get function parameters
-///
-/// TODO: return value should not be fixed length 6
-/// make it more generic to be useable out of this project's scope.
+// get function parameters
+//
+// TODO: return value should not be fixed length 6
+// make it more generic to be useable out of this project's scope.
 string[] params(string fn)
 {
     immutable syscallMaxArgs = 6;
@@ -63,7 +65,7 @@ string[] params(string fn)
         return repeat("-", syscallMaxArgs).array();
     }
 
-    /// TODO: this is bogos, invalid.
-    /// Considering we have type function pointer, which could have ",".
+    // TODO: this is bogos, invalid.
+    // Considering we have type function pointer, which could have ",".
     return fn.split(",").map!(a => a.strip()).padRight("-", syscallMaxArgs).array();
 }

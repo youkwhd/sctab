@@ -7,16 +7,16 @@ import core.stdc.stdlib : exit;
 import sctab.gen;
 import args = sctab.args : Args;
 
-/// TODO: resolve prob
-///
-/// making this relative to root path means
-/// it needs to be ran through / from the project's root path only.
+// TODO: resolve prob
+//
+// making this relative to root path means
+// it needs to be ran through / from the project's root path only.
 immutable cacheDir = "cache/";
 
 void fetch()
 {
     auto urls = [
-        /// <url>, [<filename overwrite>]
+        // <url>, [<filename overwrite>]
         ["https://raw.githubusercontent.com/torvalds/linux/master/arch/x86/entry/syscalls/syscall_64.tbl",    null],
         ["https://raw.githubusercontent.com/torvalds/linux/master/arch/x86/entry/syscalls/syscall_32.tbl",    null],
         ["https://raw.githubusercontent.com/torvalds/linux/master/include/linux/syscalls.h",                  null],
@@ -28,7 +28,7 @@ void fetch()
         fs.mkdir(cacheDir);
     }
 
-    /// TODO: add threading, log downloaded file.
+    // TODO: add threading, log downloaded file.
     foreach (url; urls)
     {
         string filename = url[1] ? url[1] : baseName(url[0]);

@@ -25,7 +25,7 @@ void help(string prog)
             "   -h, --help        prints this message and exit.\n");
 }
 
-/// Shitbox hack-ish, but it works for now
+// Shitbox hack-ish, but it works for now
 Args parse(string[] argv)
 {
     Args args;
