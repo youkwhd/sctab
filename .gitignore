@@ -3,6 +3,8 @@ cache/
 sctab
 !source/sctab/
 
+.vercel/
+
 *.exe
 *.pdb
 *.o
