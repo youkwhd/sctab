@@ -39,12 +39,17 @@ void fetch()
 void main(string[] argv)
 {
     Args args = args.parse(argv);
-
     if (args.fetch)
     {
         fetch();
         exit(0);
     }
 
-    generate(args.arch, args.format);
+    GenerateOption opt = GenerateOption.generateOptNone;
+    if (args.colorize)
+    {
+        opt |= GenerateOption.generateOptColorized;
+    }
+
+    generate(args.arch, args.format, opt);
 }

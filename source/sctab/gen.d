@@ -10,15 +10,24 @@ import std.file;
 import decl = sctab.decl;
 import tbl = sctab.tbl;
 
-enum Format {
+enum Format
+{
     html,
     csv,
 };
 
-enum Arch {
+enum Arch
+{
     x86,
     x64,
 };
+
+enum GenerateOption : int
+{
+    generateOptNone = 0,
+    generateOptColorized = 1 << 0,
+};
+
 
 string[] registers(Arch arch)
 {
@@ -38,7 +47,7 @@ private string[][] rawTable(Arch arch)
     }
 }
 
-private void generateCsv(Arch arch)
+private void generateCsv(Arch arch, GenerateOption opt)
 {
     string[][] table = rawTable(arch);
     string[] regs = arch.registers();
@@ -126,7 +135,7 @@ private void colorizeParamHtml(string param)
     write(keywords[keywords.length - 1]);
 }
 
-private void generateHtml(Arch arch)
+private void generateHtml(Arch arch, GenerateOption opt)
 {
     string[][] table = rawTable(arch);
     string[] regs = arch.registers();
@@ -159,7 +168,7 @@ private void generateHtml(Arch arch)
         string[] params = decl.params(func);
         for (int i = 0; i < 6; i++)
         {
-            if (false)
+            if ((opt & GenerateOption.generateOptColorized) != 0)
             {
                 write("            <td>");
                 colorizeParamHtml(params[i]);
@@ -177,11 +186,11 @@ private void generateHtml(Arch arch)
     writeln("</table>");
 }
 
-void generate(Arch arch, Format type)
+void generate(Arch arch, Format type, GenerateOption opt)
 {
     final switch (type)
     {
-        case Format.html: return generateHtml(arch);
-        case Format.csv: return generateCsv(arch);
+        case Format.html: return generateHtml(arch, opt);
+        case Format.csv: return generateCsv(arch, opt);
     }
 }
