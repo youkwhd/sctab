@@ -65,13 +65,65 @@ private void generateCsv(Arch arch)
         string[] params = decl.params(func);
         for (int i = 0; i < 6; i++)
         {
-            string param = i < params.length ? params[i] : "";
-            write("," ~ param);
+            write("," ~ params[i]);
         }
 
         write("\n");
     }
 
+}
+
+private void colorizeParamHtml(string param)
+{
+    string[] keywords = param.split(" ");
+    for (int j = 0; j < keywords.length - 1; j++)
+    {
+        ulong start = 0;
+        ulong end = keywords[j].length;
+
+        // check if starts with or ends with C pointer
+        if (keywords[j].length > 1)
+        {
+            start += keywords[j][0] == '*';
+            end -= keywords[j][end - 1] == '*';
+        }
+
+        if (start != 0)
+        {
+            write("*");
+        }
+
+        string kw = keywords[j][start..end];
+        switch (kw)
+        {
+            case "const":
+            case "struct":
+                write("<span style=\"color: #de333c; font-weight: bold\">" ~ kw ~ "</span>");
+                break;
+            case "*":
+                write(kw);
+                break;
+            default:
+                write("<span style=\"color: #997cd7\">" ~ kw ~ "</span>");
+                break;
+        }
+
+        if (end != keywords[j].length)
+        {
+            write("*");
+        }
+
+        write(" ");
+    }
+
+    // for type that has no variable name
+    if (keywords.length == 1 && !(keywords[0] == "?" || keywords[0] == "-"))
+    {
+        write("<span style=\"color: #997cd7\">" ~ keywords[0] ~ "</span>");
+        return;
+    }
+
+    write(keywords[keywords.length - 1]);
 }
 
 private void generateHtml(Arch arch)
@@ -107,8 +159,15 @@ private void generateHtml(Arch arch)
         string[] params = decl.params(func);
         for (int i = 0; i < 6; i++)
         {
-            string param = i < params.length ? params[i] : "";
-            writeln("            <td>" ~ param ~ "</td>");
+            if (false)
+            {
+                write("            <td>");
+                colorizeParamHtml(params[i]);
+                writeln("</td>");
+                continue;
+            }
+
+            writeln("            <td>" ~ params[i] ~ "</td>");
         }
 
         writeln("        </tr>");
