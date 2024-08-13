@@ -80,22 +80,25 @@ private void generateHtml(Arch arch)
     string[] regs = arch.registers();
 
     writeln("<table>");
-    writeln("    <tr>");
-    writeln("        <th>Name</th>");
+    writeln("    <thead>");
+    writeln("        <tr>");
+    writeln("            <th>Name</th>");
 
     for (int i = 0; i <= 6; i++)
-        writeln("        <th>" ~ regs[i] ~ "</th>");
+        writeln("            <th>" ~ regs[i] ~ "</th>");
 
-    writeln("    </tr>");
+    writeln("        </tr>");
+    writeln("    </thead>");
 
+    writeln("    <tbody>");
     foreach (ref row; table)
     {
         auto hex = appender!string();
         formattedWrite(hex, "0x%02x", to!int(row[0]));
 
-        writeln("    <tr>");
-        writeln("        <td>" ~ row[2] ~ "</td>");
-        writeln("        <td>" ~ hex[] ~ "</td>");
+        writeln("        <tr>");
+        writeln("            <td>" ~ row[2] ~ "</td>");
+        writeln("            <td>" ~ hex[] ~ "</td>");
 
         string func = decl.func("sys_" ~ row[2]);
         if (func.empty && row.length > 3)
@@ -105,11 +108,12 @@ private void generateHtml(Arch arch)
         for (int i = 0; i < 6; i++)
         {
             string param = i < params.length ? params[i] : "";
-            writeln("        <td>" ~ param ~ "</td>");
+            writeln("            <td>" ~ param ~ "</td>");
         }
 
-        writeln("    </tr>");
+        writeln("        </tr>");
     }
+    writeln("    </tbody>");
 
     writeln("</table>");
 }
