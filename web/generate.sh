@@ -47,7 +47,7 @@ cat <<EOF
         </nav>
 EOF
 
-./sctab --arch "$1" | while IFS='' read -r line; do
+./sctab --arch "$1" --colorize | while IFS='' read -r line; do
     tab 2
     echo "$line"
 done
