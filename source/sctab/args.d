@@ -9,6 +9,7 @@ import sctab.gen : Arch, Format;
 struct Args
 {
     bool fetch = false;
+    bool colorize = false;
     Format format = Format.html;
     Arch arch = Arch.x64;
 }
@@ -22,6 +23,7 @@ void help(string prog)
             "   --fetch           fetches the latest syscall table.\n",
             "   --arch <arch>     specify architecture, can be either x86 or x64.\n",
             "   --format <format> specify file format, can be either html or csv.\n",
+            "   --colorize        colorizes types (html format only).\n",
             "   -h, --help        prints this message and exit.\n");
 }
 
@@ -90,6 +92,10 @@ Args parse(string[] argv)
                         exit(1);
                 }
 
+                break;
+
+            case "--colorize":
+                args.colorize = true;
                 break;
 
             default:
