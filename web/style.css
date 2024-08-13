@@ -33,15 +33,35 @@ nav {
 }
 
 table {
-    tr {
-        td, th {
-            word-wrap: break-word;
+    border-collapse: collapse;
 
-            width: var(--table-block-width);
-            max-width: var(--table-block-width);
 
-            height: 60px;
+    tr:nth-child(even) {
+        background-color: #121212;
+    }
+
+    tr:nth-child(odd) {
+        background-color: #151515;
+    }
+
+    thead {
+        tr {
+            td, th {
+                height: 40px;
+                background-color: #131316;
+            }
         }
+    }
+
+    td, th {
+        word-wrap: break-word;
+
+        width: var(--table-block-width);
+        max-width: var(--table-block-width);
+        height: 60px;
+
+        padding: 0px 10px;
+        border: 1px solid #2c2c35;
     }
 }
 
