@@ -7,6 +7,8 @@ import std.array : appender;
 import std.format;
 import std.conv;
 import std.file;
+import std.typecons : Yes;
+import std.algorithm.iteration;
 import decl = sctab.decl;
 import tbl = sctab.tbl;
 
@@ -84,55 +86,41 @@ private void generateCsv(Arch arch, GenerateOption opt)
 
 private void colorizeParamHtml(string param)
 {
-    string[] keywords = param.split(" ");
-    for (int j = 0; j < keywords.length - 1; j++)
+    string[] keywords = param
+        .splitter!("a == b", Yes.keepSeparators)(" ")
+        .filter!(kw => !kw.empty)
+        .array();
+
+    for (int i = 0; i < keywords.length - 1; i++)
     {
-        ulong start = 0;
-        ulong end = keywords[j].length;
-
-        // check if starts with or ends with C pointer
-        if (keywords[j].length > 1)
+        foreach (kw; keywords[i].splitter!("a == b", Yes.keepSeparators)("*").filter!(kw => !kw.empty))
         {
-            start += keywords[j][0] == '*';
-            end -= keywords[j][end - 1] == '*';
+            switch (kw)
+            {
+                case "const":
+                case "struct":
+                    write("<span style=\"color: #de333c; font-weight: bold\">" ~ kw ~ "</span>");
+                    break;
+                case " ":
+                case "*":
+                    write(kw);
+                    break;
+                default:
+                    write("<span style=\"color: #997cd7\">" ~ kw ~ "</span>");
+                    break;
+            }
         }
-
-        if (start != 0)
-        {
-            write("*");
-        }
-
-        string kw = keywords[j][start..end];
-        switch (kw)
-        {
-            case "const":
-            case "struct":
-                write("<span style=\"color: #de333c; font-weight: bold\">" ~ kw ~ "</span>");
-                break;
-            case "*":
-                write(kw);
-                break;
-            default:
-                write("<span style=\"color: #997cd7\">" ~ kw ~ "</span>");
-                break;
-        }
-
-        if (end != keywords[j].length)
-        {
-            write("*");
-        }
-
-        write(" ");
     }
 
     // for type that has no variable name
     if (keywords.length == 1 && !(keywords[0] == "?" || keywords[0] == "-"))
     {
         write("<span style=\"color: #997cd7\">" ~ keywords[0] ~ "</span>");
-        return;
     }
-
-    write(keywords[keywords.length - 1]);
+    else
+    {
+        write(keywords[keywords.length - 1]);
+    }
 }
 
 private void generateHtml(Arch arch, GenerateOption opt)
