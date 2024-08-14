@@ -5,6 +5,8 @@ sctab
 
 .vercel/
 
+.dub/
+
 *.exe
 *.pdb
 *.o
