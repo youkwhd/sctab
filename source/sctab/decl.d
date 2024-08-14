@@ -13,11 +13,15 @@ import std.range;
 import std.conv;
 
 string[] header;
-bool loaded = false;
+bool     loaded = false;
 
 private void loadHeader()
 {
-    if (loaded) return;
+    if (loaded)
+    {
+        return;
+    }
+
     loaded = true;
     header ~= File("cache/syscalls.h").byLine().map!(line => to!(string)(line)).array();
     header ~= File("cache/syscalls-asm-generic.h").byLine().map!(line => to!(string)(line)).array();
@@ -32,11 +36,15 @@ string func(string name)
     for (size_t i = 0; i < header.length; i++)
     {
         if (!header[i].startsWith("asmlinkage") || header[i].indexOf(" " ~ name ~ "(") == -1)
+        {
             continue;
+        }
 
         string decl;
         while (!decl.endsWith(";"))
+        {
             decl ~= header[i++].strip();
+        }
 
         return decl;
     }

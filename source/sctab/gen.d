@@ -57,7 +57,9 @@ private void generateCsv(Arch arch, GenerateOption opt)
     write("Name");
 
     for (int i = 0; i <= 6; i++)
+    {
         write("," ~ regs[i]);
+    }
 
     write("\n");
 
@@ -71,7 +73,9 @@ private void generateCsv(Arch arch, GenerateOption opt)
 
         string func = decl.func("sys_" ~ row[2]);
         if (func.empty && row.length > 3)
+        {
             func = decl.func(row[3]);
+        }
 
         string[] params = decl.params(func);
         for (int i = 0; i < 6; i++)
@@ -101,10 +105,12 @@ private void colorizeParamHtml(string param)
                 case "struct":
                     write("<span style=\"color: #de333c; font-weight: bold\">" ~ kw ~ "</span>");
                     break;
+
                 case " ":
                 case "*":
                     write(kw);
                     break;
+
                 default:
                     write("<span style=\"color: #997cd7\">" ~ kw ~ "</span>");
                     break;
@@ -134,7 +140,9 @@ private void generateHtml(Arch arch, GenerateOption opt)
     writeln("            <th>Name</th>");
 
     for (int i = 0; i <= 6; i++)
+    {
         writeln("            <th>" ~ regs[i] ~ "</th>");
+    }
 
     writeln("        </tr>");
     writeln("    </thead>");
